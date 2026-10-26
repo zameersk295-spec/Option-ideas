@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Option Ideas - SEBI Registered Research Analyst</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#e6fdf5',
+                            100: '#c0fada',
+                            400: '#22c55e',
+                            500: '#10b981',
+                            600: '#059669',
+                            accent: '#00E676',
+                            bg: '#081311',
+                            card: '#0d1f1c',
+                            border: '#183832'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #081311;
+            color: #f3f4f6;
+            font-family: 'Inter', sans-serif;
+        }
+        .glass-card {
+            background: rgba(13, 31, 28, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(24, 56, 50, 0.8);
+        }
+        .accent-gradient {
+            background: linear-gradient(135deg, #00E676 0%, #10b981 100%);
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #081311;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #183832;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00E676;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between antialiased selection:bg-brand-accent selection:text-black">
+
+    <!-- Top SEBI Regulation Bar (Only place kept as requested) -->
+    <div class="bg-brand-bg border-b border-brand-border py-2 px-4 text-xs text-gray-300">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-1 text-center sm:text-left">
+            <div class="flex items-center gap-2">
+                <i class="fa-solid fa-shield-halved text-brand-accent"></i>
+                <span><strong>SEBI Registered Research Analyst Registration No:</strong> <span class="tracking-wider text-brand-accent font-mono font-semibold">INH00000XXXX</span></span>
+            </div>
+            <p class="text-[11px] text-gray-400">Investments in securities market are subject to market risks. Read all related documents carefully before investing.</p>
+        </div>
+    </div>
+
+    <!-- Main Header / Navigation -->
+    <header class="sticky top-0 z-40 bg-brand-bg/95 backdrop-blur border-b border-brand-border">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Brand Logo with Growth/Stock Theme SVG -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-12 h-12 rounded-xl accent-gradient flex items-center justify-center text-black shadow-lg shadow-brand-500/20 group-hover:scale-105 transition-transform p-2">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="w-8 h-8 text-black">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 17l6-6 4 4 8-8M14 7h7v7" />
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold tracking-tight text-white flex items-center gap-2">
+                        OPTION IDEAS
+                    </h1>
+                    <p class="text-[10px] tracking-widest text-brand-accent uppercase font-semibold">Research Analyst Services</p>
+                </div>
+            </a>
+
+            <!-- Mobile & Desktop Menu Trigger Button -->
+            <div class="flex items-center gap-3">
+                <button id="menuToggleBtn" onclick="toggleMenu()" class="p-3 rounded-xl bg-brand-card border border-brand-border text-gray-200 hover:text-brand-accent hover:border-brand-accent transition-all focus:outline-none" aria-label="Toggle Navigation">
+                    <i class="fa-solid fa-bars text-xl" id="menuIcon"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Slide-over Full-Screen Navigation Menu -->
+    <div id="navOverlay" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden opacity-0 transition-opacity duration-300">
+        <div class="fixed inset-y-0 right-0 max-w-sm w-full bg-brand-card border-l border-brand-border p-6 shadow-2xl flex flex-col justify-between transform translate-x-full transition-transform duration-300" id="navDrawer">
+            <div>
+                <div class="flex items-center justify-between pb-6 border-b border-brand-border">
+                    <div class="flex items-center gap-2">
+                        <div class="w-8 h-8 rounded-lg accent-gradient flex items-center justify-center p-1.5">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="w-full h-full text-black"><path stroke-linecap="round" stroke-linejoin="round" d="M3 17l6-6 4 4 8-8M14 7h7v7" /></svg>
+                        </div>
+                        <span class="font-bold text-lg text-white">Navigation</span>
+                    </div>
+                    <button onclick="toggleMenu()" class="text-gray-400 hover:text-white p-2">
+                        <i class="fa-solid fa-xmark text-xl"></i>
+                    </button>
+                </div>
+
+                <!-- Separate Page Views Links -->
+                <nav class="mt-6 flex flex-col gap-2">
+                    <button onclick="openPageModal('about')" class="w-full text-left px-4 py-3.5 rounded-xl text-gray-200 hover:bg-brand-bg hover:text-brand-accent transition flex items-center justify-between border border-transparent hover:border-brand-border font-medium">
+                        <span><i class="fa-solid fa-circle-info w-6 text-brand-accent"></i> About Us</span>
+                        <i class="fa-solid fa-chevron-right text-xs opacity-50"></i>
+                    </button>
+                    <button onclick="openPageModal('pricing')" class="w-full text-left px-4 py-3.5 rounded-xl text-gray-200 hover:bg-brand-bg hover:text-brand-accent transition flex items-center justify-between border border-transparent hover:border-brand-border font-medium">
+                        <span><i class="fa-solid fa-tags w-6 text-brand-accent"></i> Packages & Pricing</span>
+                        <i class="fa-solid fa-chevron-right text-xs opacity-50"></i>
+                    </button>
+                    <button onclick="openPageModal('payment')" class="w-full text-left px-4 py-3.5 rounded-xl text-gray-200 hover:bg-brand-bg hover:text-brand-accent transition flex items-center justify-between border border-transparent hover:border-brand-border font-medium">
+                        <span><i class="fa-solid fa-building-columns w-6 text-brand-accent"></i> Payment Methods</span>
+                        <i class="fa-solid fa-chevron-right text-xs opacity-50"></i>
+                    </button>
+                    <button onclick="openPageModal('sebi_ra_details')" class="w-full text-left px-4 py-3.5 rounded-xl text-gray-200 hover:bg-brand-bg hover:text-brand-accent transition flex items-center justify-between border border-transparent hover:border-brand-border font-medium">
+                        <span><i class="fa-solid fa-id-card w-6 text-brand-accent"></i> SEBI RA Details</span>
+                        <i class="fa-solid fa-chevron-right text-xs opacity-50"></i>
+                    </button>
+                    <button onclick="openPageModal('compliance')" class="w-full text-left px-4 py-3.5 rounded-xl text-gray-200 hover:bg-brand-bg hover:text-brand-accent transition flex items-center justify-between border border-transparent hover:border-brand-border font-medium">
+                        <span><i class="fa-solid fa-scale-balanced w-6 text-brand-accent"></i> SEBI Compliance</span>
+                        <i class="fa-solid fa-chevron-right text-xs opacity-50"></i>
+                    </button>
+                    <button onclick="openPageModal('charter')" class="w-full text-left px-4 py-3.5 rounded-xl text-gray-200 hover:bg-brand-bg hover:text-brand-accent transition flex items-center justify-between border border-transparent hover:border-brand-border font-medium">
+                        <span><i class="fa-solid fa-file-contract w-6 text-brand-accent"></i> Investor Charter</span>
+                        <i class="fa-solid fa-chevron-right text-xs opacity-50"></i>
+                    </button>
+                    <button onclick="openPageModal('contact')" class="w-full text-left px-4 py-3.5 rounded-xl text-gray-200 hover:bg-brand-bg hover:text-brand-accent transition flex items-center justify-between border border-transparent hover:border-brand-border font-medium">
+                        <span><i class="fa-solid fa-headset w-6 text-brand-accent"></i> Contact Us</span>
+                        <i class="fa-solid fa-chevron-right text-xs opacity-50"></i>
+                    </button>
+                </nav>
+            </div>
+
+            <div class="pt-6 border-t border-brand-border">
+                <button onclick="openPageModal('pricing')" class="w-full py-3.5 px-4 rounded-xl accent-gradient text-black font-bold shadow-lg shadow-brand-500/20 hover:opacity-95 transition">
+                    Subscribe Now
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content Container -->
+    <main class="flex-grow">
+
+        <!-- Hero Section -->
+        <section class="relative py-12 lg:py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto overflow-hidden">
+            <div class="text-center max-w-3xl mx-auto">
+                <h2 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-tight mb-6">
+                    Institutional Grade <br class="hidden sm:block"/>
+                    <span class="text-transparent bg-clip-text accent-gradient">Option Research & Momentum Swing Ideas</span>
+                </h2>
+
+                <p class="text-gray-300 text-base sm:text-lg leading-relaxed mb-8">
+                    Option Ideas delivers disciplined technical research, risk-defined option strategies, and high-probability momentum setups formatted strictly in accordance with SEBI Research Analyst guidelines.
+                </p>
+
+                <!-- Key Stat Badges -->
+                <div class="grid grid-cols-3 gap-3 max-w-lg mx-auto mb-10 text-center">
+                    <div class="p-3 rounded-xl bg-brand-card/60 border border-brand-border">
+                        <div class="text-brand-accent font-bold text-lg sm:text-xl">100%</div>
+                        <div class="text-[11px] sm:text-xs text-gray-400">SEBI Compliant</div>
+                    </div>
+                    <div class="p-3 rounded-xl bg-brand-card/60 border border-brand-border">
+                        <div class="text-brand-accent font-bold text-lg sm:text-xl">Defined</div>
+                        <div class="text-[11px] sm:text-xs text-gray-400">Risk Parameters</div>
+                    </div>
+                    <div class="p-3 rounded-xl bg-brand-card/60 border border-brand-border">
+                        <div class="text-brand-accent font-bold text-lg sm:text-xl">Direct</div>
+                        <div class="text-[11px] sm:text-xs text-gray-400">Analyst Channel</div>
+                    </div>
+                </div>
+
+                <!-- Call to Action Buttons -->
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <button onclick="openPageModal('pricing')" class="w-full sm:w-auto px-8 py-4 rounded-xl accent-gradient text-black font-bold text-base hover:scale-105 transition-all shadow-xl shadow-brand-500/20 flex items-center justify-center gap-2">
+                        <span>Explore Advisory Plans</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                    <button onclick="openPageModal('sebi_ra_details')" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-brand-card border border-brand-border text-white hover:border-brand-accent font-semibold text-base transition-all flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-shield"></i>
+                        <span>Verify SEBI Credentials</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Professional Stock Market & Growth Inspiration Images Gallery -->
+        <section class="py-8 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+            <div class="text-center mb-6">
+                <span class="text-xs font-bold uppercase tracking-widest text-brand-accent">Market Analytics & Growth Potential</span>
+                <h3 class="text-xl sm:text-2xl font-bold text-white mt-1">Professional Trading & Quantitative Framework</h3>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <!-- Image Card 1 -->
+                <div class="glass-card rounded-2xl overflow-hidden border border-brand-border group hover:border-brand-accent transition">
+                    <div class="h-40 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&auto=format&fit=crop&q=80" alt="Stock Chart Analysis" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" onerror="this.src='https://placehold.co/600x400/0d1f1c/00E676?text=Market+Chart'">
+                        <div class="absolute inset-0 bg-gradient-to-t from-brand-bg via-transparent to-transparent"></div>
+                    </div>
+                    <div class="p-3 text-center">
+                        <h5 class="text-xs font-bold text-white">Advanced Price Action</h5>
+                        <p class="text-[10px] text-gray-400 mt-0.5">Momentum & Breakout Triggers</p>
+                    </div>
+                </div>
+
+                <!-- Image Card 2 -->
+                <div class="glass-card rounded-2xl overflow-hidden border border-brand-border group hover:border-brand-accent transition">
+                    <div class="h-40 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=600&auto=format&fit=crop&q=80" alt="Trading Desk" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" onerror="this.src='https://placehold.co/600x400/0d1f1c/00E676?text=Trading+Desk'">
+                        <div class="absolute inset-0 bg-gradient-to-t from-brand-bg via-transparent to-transparent"></div>
+                    </div>
+                    <div class="p-3 text-center">
+                        <h5 class="text-xs font-bold text-white">Institutional Analysis</h5>
+                        <p class="text-[10px] text-gray-400 mt-0.5">Open Interest & Volume Profiling</p>
+                    </div>
+                </div>
+
+                <!-- Image Card 3 -->
+                <div class="glass-card rounded-2xl overflow-hidden border border-brand-border group hover:border-brand-accent transition">
+                    <div class="h-40 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1642543492481-44e81e3914a7?w=600&auto=format&fit=crop&q=80" alt="Financial Growth" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" onerror="this.src='https://placehold.co/600x400/0d1f1c/00E676?text=Financial+Growth'">
+                        <div class="absolute inset-0 bg-gradient-to-t from-brand-bg via-transparent to-transparent"></div>
+                    </div>
+                    <div class="p-3 text-center">
+                        <h5 class="text-xs font-bold text-white">Option Greeks Evaluation</h5>
+                        <p class="text-[10px] text-gray-400 mt-0.5">Risk Defined Strategies</p>
+                    </div>
+                </div>
+
+                <!-- Image Card 4 -->
+                <div class="glass-card rounded-2xl overflow-hidden border border-brand-border group hover:border-brand-accent transition">
+                    <div class="h-40 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=600&auto=format&fit=crop&q=80" alt="Business Meeting" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" onerror="this.src='https://placehold.co/600x400/0d1f1c/00E676?text=Expert+Advisory'">
+                        <div class="absolute inset-0 bg-gradient-to-t from-brand-bg via-transparent to-transparent"></div>
+                    </div>
+                    <div class="p-3 text-center">
+                        <h5 class="text-xs font-bold text-white">Disciplined Execution</h5>
+                        <p class="text-[10px] text-gray-400 mt-0.5">Structured Research Guidance</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features & Methodology Section -->
+        <section class="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+            <div class="text-center mb-10">
+                <span class="text-xs font-bold uppercase tracking-widest text-brand-accent">About Option Ideas</span>
+                <h3 class="text-2xl sm:text-3xl font-bold text-white mt-1">Quantitative Price Action & Option Greeks Analysis</h3>
+                <p class="text-gray-400 text-sm max-w-2xl mx-auto mt-2">
+                    Option Ideas is a dedicated SEBI Registered Research Analyst advisory led by Deepak Singh. We analyze market liquidity, open interest, volume profiling, and technical momentum to provide systematic trade recommendations.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="glass-card p-6 rounded-2xl hover:border-brand-accent transition">
+                    <div class="w-12 h-12 rounded-xl bg-brand-accent/10 text-brand-accent flex items-center justify-center text-xl mb-4 border border-brand-accent/20">
+                        <i class="fa-solid fa-chart-line"></i>
+                    </div>
+                    <h4 class="text-lg font-bold text-white mb-2">Strict Stop-Loss & Risk Management</h4>
+                    <p class="text-gray-400 text-sm leading-relaxed">Every trade setup is published with precise entry levels, initial stop loss, trailing stop loss guidelines, and targeted profit zones.</p>
+                </div>
+
+                <div class="glass-card p-6 rounded-2xl hover:border-brand-accent transition">
+                    <div class="w-12 h-12 rounded-xl bg-brand-accent/10 text-brand-accent flex items-center justify-center text-xl mb-4 border border-brand-accent/20">
+                        <i class="fa-solid fa-shield-cat"></i>
+                    </div>
+                    <h4 class="text-lg font-bold text-white mb-2">Full Regulatory Compliance</h4>
+                    <p class="text-gray-400 text-sm leading-relaxed">We do not engage in profit-sharing, handling investor capital, or providing guaranteed return schemes. All advisory fees are strictly fixed.</p>
+                </div>
+
+                <div class="glass-card p-6 rounded-2xl hover:border-brand-accent transition">
+                    <div class="w-12 h-12 rounded-xl bg-brand-accent/10 text-brand-accent flex items-center justify-center text-xl mb-4 border border-brand-accent/20">
+                        <i class="fa-solid fa-bell"></i>
+                    </div>
+                    <h4 class="text-lg font-bold text-white mb-2">Real-Time Market Alerts</h4>
+                    <p class="text-gray-400 text-sm leading-relaxed">Receive instant research notifications during live market hours when entry criteria or trailing stop-loss triggers are met.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Advisory Packages / Pricing Section (4 Plans Updated) -->
+        <section id="pricingSection" class="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+            <div class="text-center mb-10">
+                <span class="inline-block px-3 py-1 rounded-full bg-brand-accent/10 text-brand-accent text-xs font-bold tracking-widest uppercase mb-2">Transparent Pricing</span>
+                <h3 class="text-3xl font-extrabold text-white">Research Advisory Packages</h3>
+                <p class="text-gray-400 text-sm max-w-2xl mx-auto mt-2">
+                    Fees structured in compliance with SEBI maximum fee capping rules. Exclusive of 18% GST.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- 1. Basic Plan -->
+                <div class="glass-card rounded-2xl p-5 flex flex-col justify-between border border-brand-border hover:border-brand-accent transition">
+                    <div>
+                        <div class="text-[11px] font-bold text-brand-accent uppercase tracking-wider mb-1">Tier 1 Advisory</div>
+                        <h4 class="text-lg font-bold text-white mb-3">Basic Plan</h4>
+                        <div class="mb-5 p-3 rounded-xl bg-brand-bg border border-brand-accent/30 text-center">
+                            <span class="text-[11px] text-gray-400 block mb-0.5">1 Month Subscription</span>
+                            <span class="text-2xl font-extrabold text-brand-accent">₹25,000</span>
+                            <span class="text-[10px] text-gray-400 block">+ 18% GST (₹4,500)</span>
+                            <div class="text-[11px] text-white font-bold mt-2 bg-brand-accent/10 py-1 rounded">Total: ₹29,500</div>
+                        </div>
+
+                        <ul class="space-y-2.5 text-xs text-gray-300 mb-6">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-accent"></i> Index Options Research (Nifty / BankNifty)</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-accent"></i> Stock Options & Momentum Breakout Setups</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-accent"></i> Target & Stop-Loss Updates</li>
+                        </ul>
+                    </div>
+                    <button onclick="openPageModal('payment')" class="w-full py-3 rounded-xl bg-brand-bg border border-brand-accent text-brand-accent font-bold hover:bg-brand-accent hover:text-black transition text-xs shadow-lg">
+                        SUBSCRIBE BASIC
+                    </button>
+                </div>
+
+                <!-- 2. Standard Plan -->
+                <div class="glass-card rounded-2xl p-5 flex flex-col justify-between border border-brand-border hover:border-brand-accent transition">
+                    <div>
+                        <div class="text-[11px] font-bold text-brand-accent uppercase tracking-wider mb-1">Tier 2 Advisory</div>
+                        <h4 class="text-lg font-bold text-white mb-3">Standard Plan</h4>
+                        <div class="mb-5 p-3 rounded-xl bg-brand-bg border border-brand-accent/30 text-center">
+                            <span class="text-[11px] text-gray-400 block mb-0.5">3 Months Subscription</span>
+                            <span class="text-2xl font-extrabold text-brand-accent">₹45,000</span>
+                            <span class="text-[10px] text-gray-400 block">+ 18% GST (₹8,100)</span>
+                            <div class="text-[11px] text-white font-bold mt-2 bg-brand-accent/10 py-1 rounded">Total: ₹53,100</div>
+                        </div>
+
+                        <ul class="space-y-2.5 text-xs text-gray-300 mb-6">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-accent"></i> Everything in Basic Plan</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-accent"></i> Advanced Option Greeks Guidance</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-accent"></i> Weekly Market Trend Analysis</li>
+                        </ul>
+                    </div>
+                    <button onclick="openPageModal('payment')" class="w-full py-3 rounded-xl bg-brand-bg border border-brand-accent text-brand-accent font-bold hover:bg-brand-accent hover:text-black transition text-xs shadow-lg">
+                        SUBSCRIBE STANDARD
+                    </button>
+                </div>
+
+                <!-- 3. Growth Plan (Recommended) -->
+                <div class="glass-card rounded-2xl p-5 flex flex-col justify-between border-2 border-brand-accent relative shadow-xl shadow-brand-500/10">
+                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 accent-gradient text-black text-[10px] font-extrabold px-3 py-0.5 rounded-full uppercase tracking-wider shadow">
+                        Popular
+                    </div>
+                    <div>
+                        <div class="text-[11px] font-bold text-brand-accent uppercase tracking-wider mb-1 mt-1">Tier 3 Advisory</div>
+                        <h4 class="text-lg font-bold text-white mb-3">Growth Plan</h4>
+                        <div class="mb-5 p-3 rounded-xl bg-brand-bg border-2 border-brand-accent text-center shadow-inner">
+                            <span class="text-[11px] text-brand-accent block mb-0.5 font-semibold">6 Months Subscription</span>
+                            <span class="text-2xl font-extrabold text-white">₹75,000</span>
+                            <span class="text-[10px] text-gray-400 block">+ 18% GST (₹13,500)</span>
+                            <div class="text-[11px] text-black font-extrabold mt-2 accent-gradient py-1 rounded shadow">Total: ₹88,500</div>
+                        </div>
+
+                        <ul class="space-y-2.5 text-xs text-gray-300 mb-6">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-accent"></i> Everything in Standard Plan</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-accent"></i> Positional Swing Stock Recommendations</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-accent"></i> Priority Helpdesk Support</li>
+                        </ul>
+                    </div>
+                    <button onclick="openPageModal('payment')" class="w-full py-3 rounded-xl accent-gradient text-black font-extrabold hover:opacity-90 transition text-xs shadow-lg">
+                        SUBSCRIBE GROWTH
+                    </button>
+                </div>
+
+                <!-- 4. Wealth Plan -->
+                <div class="glass-card rounded-2xl p-5 flex flex-col justify-between border border-brand-border hover:border-brand-accent transition">
+                    <div>
+                        <div class="text-[11px] font-bold text-brand-accent uppercase tracking-wider mb-1">Tier 4 Advisory</div>
+                        <h4 class="text-lg font-bold text-white mb-3">Wealth Plan</h4>
+                        <div class="mb-5 p-3 rounded-xl bg-brand-bg border border-brand-accent/30 text-center">
+                            <span class="text-[11px] text-gray-400 block mb-0.5">1 Year Subscription</span>
+                            <span class="text-2xl font-extrabold text-brand-accent">₹1,51,000</span>
+                            <span class="text-[10px] text-gray-400 block">+ 18% GST (₹27,180)</span>
+                            <div class="text-[11px] text-white font-bold mt-2 bg-brand-accent/10 py-1 rounded">Total: ₹1,78,180</div>
+                        </div>
+
+                        <ul class="space-y-2.5 text-xs text-gray-300 mb-6">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-accent"></i> Complete Equity & Derivative Coverage</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-accent"></i> Long Term Multi-bagger Research</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-accent"></i> Direct Quarterly Analyst Sessions</li>
+                        </ul>
+                    </div>
+                    <button onclick="openPageModal('payment')" class="w-full py-3 rounded-xl bg-brand-bg border border-brand-accent text-brand-accent font-bold hover:bg-brand-accent hover:text-black transition text-xs shadow-lg">
+                        SUBSCRIBE WEALTH
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Payment Methods Preview Section -->
+        <section class="py-10 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
+            <div class="glass-card p-6 rounded-2xl border border-brand-border">
+                <div class="text-center mb-6">
+                    <span class="text-xs font-bold uppercase tracking-widest text-brand-accent">Verified Payment Channels</span>
+                    <h4 class="text-xl font-bold text-white mt-1">Official Bank Accounts & Payment Methods</h4>
+                    <p class="text-xs text-gray-400 mt-1">In compliance with SEBI Regulations, fees are accepted solely into official bank accounts. <span class="text-red-400 font-semibold">No Cash Payments Allowed.</span></p>
+                </div>
+
+                <div class="bg-brand-bg p-5 rounded-xl border border-brand-border space-y-3 font-mono text-xs text-gray-300">
+                    <div class="flex flex-col sm:flex-row justify-between py-1 border-b border-brand-border/50">
+                        <span class="text-gray-400">Account Holder Name:</span>
+                        <span class="text-white font-bold">[ ENTER ACCOUNT HOLDER NAME ]</span>
+                    </div>
+                    <div class="flex flex-col sm:flex-row justify-between py-1 border-b border-brand-border/50">
+                        <span class="text-gray-400">Bank Name:</span>
+                        <span class="text-white font-bold">[ ENTER BANK NAME ]</span>
+                    </div>
+                    <div class="flex flex-col sm:flex-row justify-between py-1 border-b border-brand-border/50">
+                        <span class="text-gray-400">Account Number:</span>
+                        <span class="text-white font-bold">[ ENTER ACCOUNT NO ]</span>
+                    </div>
+                    <div class="flex flex-col sm:flex-row justify-between py-1 border-b border-brand-border/50">
+                        <span class="text-gray-400">IFSC Code:</span>
+                        <span class="text-white font-bold">[ ENTER IFSC CODE ]</span>
+                    </div>
+                    <div class="flex flex-col sm:flex-row justify-between py-1">
+                        <span class="text-gray-400">Official UPI ID:</span>
+                        <span class="text-white font-bold">[ ENTER UPI ID ]</span>
+                    </div>
+                </div>
+
+                <div class="mt-6 text-center">
+                    <button onclick="openPageModal('payment')" class="px-6 py-2.5 rounded-xl accent-gradient text-black text-xs font-bold hover:opacity-95 transition">
+                        View Complete Payment Instructions
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEBI Disclosures & Investor Charter Section -->
+        <section class="py-12 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
+            <div class="glass-card p-6 sm:p-8 rounded-2xl border border-brand-border space-y-6">
+                <div class="text-center">
+                    <span class="text-xs font-bold uppercase tracking-widest text-brand-accent">Mandatory Disclosures</span>
+                    <h3 class="text-2xl font-bold text-white mt-1">SEBI Regulatory Details & Disclaimers</h3>
+                    <p class="text-xs text-gray-400 font-mono mt-1">Research Analyst Registration: INH00000XXXX</p>
+                </div>
+
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
+                    <button onclick="openPageModal('sebi_ra_details')" class="p-3 rounded-xl bg-brand-bg border border-brand-border hover:border-brand-accent text-center text-gray-200 font-semibold transition">
+                        SEBI RA Details
+                    </button>
+                    <button onclick="openPageModal('charter')" class="p-3 rounded-xl bg-brand-bg border border-brand-border hover:border-brand-accent text-center text-gray-200 font-semibold transition">
+                        Investor Charter
+                    </button>
+                    <button onclick="openPageModal('compliance')" class="p-3 rounded-xl bg-brand-bg border border-brand-border hover:border-brand-accent text-center text-gray-200 font-semibold transition">
+                        Grievance / SCORES
+                    </button>
+                    <button onclick="openPageModal('compliance')" class="p-3 rounded-xl bg-brand-bg border border-brand-border hover:border-brand-accent text-center text-gray-200 font-semibold transition">
+                        Terms & Policy
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Helpdesk & Contact Section -->
+        <section id="contactSection" class="py-12 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
+            <div class="glass-card p-6 sm:p-8 rounded-2xl border border-brand-border">
+                <div class="text-center mb-8">
+                    <span class="text-xs font-bold uppercase tracking-widest text-brand-accent">Get In Touch</span>
+                    <h3 class="text-2xl font-bold text-white mt-1">Customer Support & Helpdesk</h3>
+                    <p class="text-xs text-gray-400 mt-1">Have questions regarding subscription packages or onboarding? Contact us.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <div class="p-4 rounded-xl bg-brand-bg border border-brand-border flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-lg bg-brand-accent/10 text-brand-accent flex items-center justify-center text-lg flex-shrink-0">
+                            <i class="fa-solid fa-location-dot"></i>
+                        </div>
+                        <div class="text-xs">
+                            <h5 class="font-bold text-white mb-1">Registered Office Address</h5>
+                            <p class="text-gray-400">Option Ideas Research Advisory, Office No. 190, Financial Tech Park, BKC, Mumbai, Maharashtra - 400051.</p>
+                        </div>
+                    </div>
+
+                    <div class="p-4 rounded-xl bg-brand-bg border border-brand-border flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-lg bg-brand-accent/10 text-brand-accent flex items-center justify-center text-lg flex-shrink-0">
+                            <i class="fa-solid fa-phone"></i>
+                        </div>
+                        <div class="text-xs">
+                            <h5 class="font-bold text-white mb-1">Support Helpline</h5>
+                            <p class="text-brand-accent font-semibold text-sm">+91 98765 43110</p>
+                            <p class="text-gray-400">(Mon - Fri: 9:00 AM - 6:00 PM)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <form onsubmit="handleFormSubmit(event)" class="space-y-4">
+                    <h4 class="text-sm font-bold text-white border-b border-brand-border pb-2">Send Inquiry / Contact Support</h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-300 mb-1">Full Name *</label>
+                            <input type="text" required placeholder="Your Name" class="w-full bg-brand-bg border border-brand-border rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-brand-accent">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-300 mb-1">Mobile Number *</label>
+                            <input type="tel" required value="+91 98765 43110" class="w-full bg-brand-bg border border-brand-border rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-brand-accent">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-300 mb-1">Message *</label>
+                        <textarea rows="3" required placeholder="Type your query here..." class="w-full bg-brand-bg border border-brand-border rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-brand-accent"></textarea>
+                    </div>
+                    <button type="submit" class="w-full py-3 rounded-xl accent-gradient text-black font-extrabold text-xs uppercase tracking-wider hover:opacity-95 transition">
+                        SUBMIT INQUIRY
+                    </button>
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-brand-bg border-t border-brand-border py-8 px-4 sm:px-6 lg:px-8 text-xs text-gray-400">
+        <div class="max-w-7xl mx-auto space-y-6">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4 pb-6 border-b border-brand-border">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-lg accent-gradient flex items-center justify-center p-1.5">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="w-full h-full text-black"><path stroke-linecap="round" stroke-linejoin="round" d="M3 17l6-6 4 4 8-8M14 7h7v7" /></svg>
+                    </div>
+                    <div>
+                        <span class="font-bold text-white text-sm">OPTION IDEAS</span>
+                        <p class="text-[10px] text-gray-400">SEBI Registered Research Analyst Advisory Platform.</p>
+                    </div>
+                </div>
+
+                <div class="flex flex-wrap justify-center gap-6 text-xs text-gray-300">
+                    <button onclick="openPageModal('about')" class="hover:text-brand-accent">About Us</button>
+                    <button onclick="openPageModal('pricing')" class="hover:text-brand-accent">Subscription Plans</button>
+                    <button onclick="openPageModal('sebi_ra_details')" class="hover:text-brand-accent text-brand-accent font-bold">SEBI RA Details</button>
+                    <button onclick="openPageModal('payment')" class="hover:text-brand-accent">Payment Accounts</button>
+                    <button onclick="openPageModal('charter')" class="hover:text-brand-accent">Investor Charter</button>
+                </div>
+            </div>
+
+            <div class="text-center text-[11px] text-gray-400 pt-4 border-t border-brand-border/40">
+                © 2026 Option Ideas (Deepak Ramesh Singh). All Rights Reserved. Built strictly per SEBI RA Guidelines.
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- Dedicated Modal View Component -->
+    <div id="pageModal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-xl hidden overflow-y-auto">
+        <div class="min-h-screen px-4 py-8 flex items-center justify-center">
+            <div class="glass-card w-full max-w-4xl rounded-2xl border border-brand-border overflow-hidden relative shadow-2xl my-auto">
+                <div class="bg-brand-bg px-6 py-4 border-b border-brand-border flex items-center justify-between sticky top-0 z-10">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-lg accent-gradient flex items-center justify-center p-1.5">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="w-full h-full text-black"><path stroke-linecap="round" stroke-linejoin="round" d="M3 17l6-6 4 4 8-8M14 7h7v7" /></svg>
+                        </div>
+                        <div>
+                            <h3 id="modalTitle" class="text-lg font-bold text-white">Document View</h3>
+                            <p class="text-[10px] font-mono text-brand-accent">content://option-ideas.internal/page</p>
+                        </div>
+                    </div>
+                    <button onclick="closePageModal()" class="w-10 h-10 rounded-xl bg-brand-card border border-brand-border text-gray-300 hover:text-brand-accent hover:border-brand-accent flex items-center justify-center transition">
+                        <i class="fa-solid fa-xmark text-lg"></i>
+                    </button>
+                </div>
+
+                <div id="modalBody" class="p-6 sm:p-8 space-y-6 text-sm text-gray-300 max-h-[75vh] overflow-y-auto"></div>
+
+                <div class="bg-brand-bg px-6 py-4 border-t border-brand-border flex justify-between items-center text-xs">
+                    <span class="text-gray-400 font-mono">SEBI Registration No: INH00000XXXX</span>
+                    <button onclick="closePageModal()" class="px-5 py-2 rounded-xl bg-brand-card border border-brand-border text-white hover:border-brand-accent font-bold transition">
+                        Close Window
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        function toggleMenu() {
+            const overlay = document.getElementById('navOverlay');
+            const drawer = document.getElementById('navDrawer');
+            if (overlay.classList.contains('hidden')) {
+                overlay.classList.remove('hidden');
+                setTimeout(() => {
+                    overlay.classList.remove('opacity-0');
+                    drawer.classList.remove('translate-x-full');
+                }, 10);
+            } else {
+                overlay.classList.add('opacity-0');
+                drawer.classList.add('translate-x-full');
+                setTimeout(() => overlay.classList.add('hidden'), 300);
+            }
+        }
+
+        function openPageModal(pageKey) {
+            const overlay = document.getElementById('navOverlay');
+            if (!overlay.classList.contains('hidden')) toggleMenu();
+
+            const modal = document.getElementById('pageModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalBody = document.getElementById('modalBody');
+
+            let title = "";
+            let content = "";
+
+            switch(pageKey) {
+                case 'sebi_ra_details':
+                    title = "SEBI Registered Research Analyst Details";
+                    content = `
+                        <div class="space-y-4">
+                            <div class="p-5 rounded-xl bg-brand-bg border border-brand-accent/40 space-y-3 font-mono text-xs">
+                                <div class="flex flex-col sm:flex-row justify-between border-b border-brand-border/40 pb-2">
+                                    <span class="text-gray-400">Company / Firm Name:</span>
+                                    <span class="text-white font-bold text-sm">Option Ideas (Research Advisory Services)</span>
+                                </div>
+                                <div class="flex flex-col sm:flex-row justify-between border-b border-brand-border/40 pb-2">
+                                    <span class="text-gray-400">Principal Analyst Name:</span>
+                                    <span class="text-brand-accent font-bold text-sm">Deepak Ramesh Singh</span>
+                                </div>
+                                <div class="flex flex-col sm:flex-row justify-between border-b border-brand-border/40 pb-2">
+                                    <span class="text-gray-400">SEBI Registration Number:</span>
+                                    <span class="text-brand-accent font-bold text-sm">INH00000XXXX</span>
+                                </div>
+                                <div class="flex flex-col sm:flex-row justify-between border-b border-brand-border/40 pb-2">
+                                    <span class="text-gray-400">Compliance & Support Email:</span>
+                                    <span class="text-white font-bold">compliance@optionideas.in</span>
+                                </div>
+                                <div class="flex flex-col sm:flex-row justify-between border-b border-brand-border/40 pb-2">
+                                    <span class="text-gray-400">Helpline Phone:</span>
+                                    <span class="text-white font-bold">+91 98765 43110</span>
+                                </div>
+                                <div class="flex flex-col sm:flex-row justify-between pt-1">
+                                    <span class="text-gray-400">Registered Address:</span>
+                                    <span class="text-white font-bold text-right">Option Ideas Research Advisory, Office No. 190, Financial Tech Park, BKC, Mumbai, Maharashtra - 400051</span>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    break;
+
+                case 'about':
+                    title = "About Us - Option Ideas";
+                    content = `<div class="p-4 rounded-xl bg-brand-bg border border-brand-border"><p class="text-xs text-gray-300">Option Ideas is a premier research analyst firm committed to quantitative trading models and option greeks evaluation led by Deepak Ramesh Singh.</p></div>`;
+                    break;
+
+                case 'pricing':
+                    title = "Packages & Pricing - Advisory Plans";
+                    content = `
+                        <div class="space-y-4 text-xs">
+                            <div class="p-3 bg-brand-bg rounded-xl border border-brand-border"><strong>1. Basic Plan (1 Month):</strong> ₹25,000 + 18% GST = ₹29,500</div>
+                            <div class="p-3 bg-brand-bg rounded-xl border border-brand-border"><strong>2. Standard Plan (3 Months):</strong> ₹45,000 + 18% GST = ₹53,100</div>
+                            <div class="p-3 bg-brand-bg rounded-xl border border-brand-border"><strong>3. Growth Plan (6 Months):</strong> ₹75,000 + 18% GST = ₹88,500</div>
+                            <div class="p-3 bg-brand-bg rounded-xl border border-brand-border"><strong>4. Wealth Plan (1 Year):</strong> ₹1,51,000 + 18% GST = ₹1,78,180</div>
+                        </div>
+                    `;
+                    break;
+
+                case 'payment':
+                    title = "Official Bank Accounts & Payment Methods";
+                    content = `<div class="p-4 rounded-xl bg-brand-bg border border-brand-border font-mono text-xs"><p class="text-white font-bold mb-2">Official Bank Transfer Details:</p><p class="text-gray-400">Account Holder: [ ENTER ACCOUNT HOLDER NAME ]</p><p class="text-gray-400">Bank Name: [ ENTER BANK NAME ]</p><p class="text-gray-400">A/C No: [ ENTER ACCOUNT NO ] | IFSC: [ ENTER IFSC CODE ]</p></div>`;
+                    break;
+
+                case 'compliance':
+                    title = "SEBI Compliance & Grievance Redressal";
+                    content = `<div class="p-4 rounded-xl bg-brand-bg border border-brand-border text-xs"><p>For grievances, contact compliance@optionideas.in or visit SEBI SCORES portal.</p></div>`;
+                    break;
+
+                case 'charter':
+                    title = "Investor Charter - Research Analyst";
+                    content = `<div class="p-4 rounded-xl bg-brand-bg border border-brand-border text-xs"><p>Vision: To provide objective market research insights helping investors make informed decisions.</p></div>`;
+                    break;
+
+                case 'contact':
+                    title = "Customer Support";
+                    content = `<div class="p-4 rounded-xl bg-brand-bg border border-brand-border text-xs"><p>Helpline: +91 98765 43110</p></div>`;
+                    break;
+
+                default:
+                    title = "Option Ideas View";
+                    content = "<p>Content loaded.</p>";
+            }
+
+            modalTitle.innerText = title;
+            modalBody.innerHTML = content;
+            modal.classList.remove('hidden');
+        }
+
+        function closePageModal() {
+            document.getElementById('pageModal').classList.add('hidden');
+        }
+
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            alert("Thank you! Your inquiry has been submitted successfully.");
+            event.target.reset();
+        }
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') closePageModal();
+        });
+    </script>
+</body>
+</html>
